@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== "production") {
 //END DEV
 
 const userRoutes = require("./routes/users");
-const feedbackRoutes = require('./routes/feedback');
+const feedbackRoutes = require('./routes/surveys');
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/home.html');
