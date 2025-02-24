@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 //FOR DEV
 if (process.env.NODE_ENV !== "production") {
     const devConfig = require('./config/devConfig');
