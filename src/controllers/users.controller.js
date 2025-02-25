@@ -1,26 +1,35 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../models/users.model");
-const { isValidEmail } = require("../utils/validators");
+const { isValidEmail, validatePassword } = require("../utils/validators");
 
 exports.createUser = async (req, res) => {
     const { username, email, password } = req.body;
     const saltRounds = 10;
+    const errors = {};
 
     try {
-        if (!isValidEmail(email)) {
-            return res.status(400).json({
-                status: "fail",
-                message: "Email is invalid.",
-            });
-        }
         if (await userModel.isUserTaken(username, email)) {
-            return res.status(400).json({
-                status: "fail",
-                message: "Username or email is already taken.",
-            });
+            errors.user = "Username or email is already taken.";
         }
 
-        //TODO: check that password meets requirements
+        if (!isValidEmail(email)) {
+            errors.email = "Email is invalid.";
+        }
+
+        const passwordErrors = validatePassword(password);
+        if (passwordErrors.length > 0) {
+            errors.password = passwordErrors;
+        }
+
+        if (Object.keys(errors).length > 0) {
+            return res.status(400).json({
+                status: "fail",
+                message: "Invalid inputs.",
+                data: {
+                    errors: errors
+                },
+            });
+        }
 
         const passwordHash = await bcrypt.hash(password, saltRounds);
 
