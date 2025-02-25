@@ -1,14 +1,41 @@
-const db = require("../config/db.config");
+const bcrypt = require("bcrypt");
+const userModel = require("../models/users.model");
+const { isValidEmail } = require("../utils/validators");
 
-exports.getAllUsers = async (req, res) => {
-    res.write("This is the all users route");
+exports.createUser = async (req, res) => {
+    const { username, email, password } = req.body;
+    const saltRounds = 10;
+
     try {
-        const result = await db.query("SELECT * FROM users ORDER BY id ASC LIMIT 1");
-        const user = result.rows[0];
-        const username = String(user.username);
-        res.write("\n" + username);
-    } catch (e) {
-        res.write("Error fetching users.");
+        if (!isValidEmail(email)) {
+            return res.status(400).json({
+                status: "fail",
+                message: "Email is invalid.",
+            });
+        }
+        if (await userModel.isUserTaken(username, email)) {
+            return res.status(400).json({
+                status: "fail",
+                message: "Username or email is already taken.",
+            });
+        }
+
+        //TODO: check that password meets requirements
+
+        const passwordHash = await bcrypt.hash(password, saltRounds);
+
+        userModel.createUser(username, email, passwordHash);
+
+        res.status(201).json({
+            status: "success",
+            message: "User created successfully.",
+            data: `Username: ${username}, Email: ${email}`,
+        });
+    } catch (err) {
+        console.error("Error creating user: " + err);
+        res.status(500).json({
+            status: "error",
+            message: "Internal server error.",
+        });
     }
-    res.send();
 };
