@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.static(__dirname + "/public"));
 
 //FOR DEV
 if (process.env.NODE_ENV !== "production") {

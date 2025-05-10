@@ -4,8 +4,64 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link href="./output.css" rel="stylesheet" />
+        <script type="module" src="/components/header.js"></script>
     </head>
-    <body>
-        <h1>Home</h1>
+    <body class="bg-white text-black min-h-screen flex flex-col items-center">
+
+        <site-header></site-header>
+
+        <main class="flex flex-col md:flex-row items-center justify-between max-w-6xl w-full gap-12 px-6 py-4">
+            <div class="max-w-xl text-left md:text-left">
+                <h2
+                    class="text-2xl md:text-5xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-bl from-violet-500 to-fuchsia-500"
+                >
+                    <span class="block">Build smarter surveys.</span>
+                    <span class="block">Get smarter insights.</span>
+                </h2>
+                <p class="mt-6 text-lg">
+                    Stop guessing what to ask and what it means. SurvAI helps you create high-quality, AI-generated
+                    survey questions in seconds. Then it analyzes responses to reveal key points and overall sentiment,
+                    so you can make confident, data-driven decisions.
+                </p>
+                <button
+                    class="mt-8 px-6 py-3 rounded bg-lime-500 text-white font-semibold hover:bg-lime-400 transition"
+                >
+                    Get Started
+                </button>
+            </div>
+
+            <div class="w-full max-w-sm">
+                <div class="bg-gradient-to-tr from-pink-400 via-purple-400 to-yellow-300 p-1 rounded-xl shadow-xl">
+                    <div class="bg-white rounded-xl p-4 text-sm border border-zinc-200">
+                        <h3 class="text-zinc-900 font-semibold mb-2 flex items-center gap-2">
+                            <span
+                                class="w-2 h-2 rounded-full bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500"
+                            ></span>
+                            Survey
+                        </h3>
+                        <div class="space-y-1">
+                            <p class="text-zinc-700">How satisfied are you with the product?</p>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="bg-zinc-100 px-3 py-1 rounded text-zinc-800">Very satisfied</span>
+                                <span class="bg-zinc-100 px-3 py-1 rounded text-zinc-800">Neutral</span>
+                                <span class="bg-zinc-100 px-3 py-1 rounded text-zinc-800">Dissatisfied</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-zinc-900 font-semibold mb-1">Response analysis</h4>
+                            <ul class="list-disc list-inside text-zinc-600">
+                                <li>Many users are satisfied</li>
+                                <li>Negative feedback on reliability</li>
+                            </ul>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-zinc-900 font-semibold mb-1">Sentiment</h4>
+                            <p class="text-blue-600">Mostly positive</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </body>
 </html>

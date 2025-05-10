@@ -33,7 +33,7 @@ exports.createUser = async (req, res) => {
 
         const passwordHash = await bcrypt.hash(password, saltRounds);
 
-        userModel.createUser(username, email, passwordHash);
+        await userModel.createUser(username, email, passwordHash);
 
         res.status(201).json({
             status: "success",
