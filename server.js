@@ -13,14 +13,20 @@ if (process.env.NODE_ENV !== "production") {
 }
 //END DEV
 
-const userRoutes = require("./src/routes/users.route");
+const authRoutes = require("./src/routes/auth.route");
+const userRoutes = require("./src/routes/user.route");
 const feedbackRoutes = require("./src/routes/surveys.route");
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/home.html");
+    res.sendFile(__dirname + "/public/pages/home.html");
 });
 
-app.use("/users", userRoutes);
+app.get("/login", (req, res) => {
+    res.sendFile(__dirname + "/public/pages/login.html");
+});
+
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 app.use("/feedback", feedbackRoutes);
 
 app.listen(port, () => {

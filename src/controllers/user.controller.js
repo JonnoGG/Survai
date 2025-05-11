@@ -1,15 +1,15 @@
 const bcrypt = require("bcrypt");
-const userModel = require("../models/users.model");
+const userModel = require("../models/user.model");
 const { isValidEmail, validatePassword } = require("../utils/validators");
 
 exports.createUser = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
     const saltRounds = 10;
     const errors = {};
 
     try {
-        if (await userModel.isUserTaken(username, email)) {
-            errors.user = "Username or email is already taken.";
+        if (await userModel.isUserTaken(email)) {
+            errors.user = "An account with that email already exists. Please log in or reset your password.";
         }
 
         if (!isValidEmail(email)) {
@@ -26,19 +26,19 @@ exports.createUser = async (req, res) => {
                 status: "fail",
                 message: "Invalid inputs.",
                 data: {
-                    errors: errors
-                },
+                    errors: errors,
+                }
             });
         }
 
         const passwordHash = await bcrypt.hash(password, saltRounds);
 
-        await userModel.createUser(username, email, passwordHash);
+        await userModel.createUser(email, passwordHash);
 
         res.status(201).json({
             status: "success",
             message: "User created successfully.",
-            data: `Username: ${username}, Email: ${email}`,
+            data: `Email: ${email}`,
         });
     } catch (err) {
         console.error("Error creating user: " + err);

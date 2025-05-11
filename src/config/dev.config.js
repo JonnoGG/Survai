@@ -3,7 +3,7 @@ const connectLivereload = require("connect-livereload");
 
 module.exports = (app) => {
     const liveReloadServer = livereload.createServer();
-    liveReloadServer.watch(__dirname + "/../public");
+    liveReloadServer.watch(__dirname + "/public");
     app.use(connectLivereload());
 
     liveReloadServer.server.once("connection", () => {
