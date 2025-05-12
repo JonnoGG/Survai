@@ -1,4 +1,4 @@
-const form = document.getElementById("loginForm");
+const form = document.getElementById("signupForm");
 const msg = document.getElementById("message");
 
 form.addEventListener("submit", async e => {
@@ -6,9 +6,14 @@ form.addEventListener("submit", async e => {
     msg.textContent = "";
     const email = form.email.value;
     const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
 
+    if (password !== confirmPassword) {
+        msg.textContent = "Passwords do not match."
+        return;
+    }
     try {
-        const res = await fetch("/auth/login", {
+        const res = await fetch("/auth/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
@@ -27,16 +32,16 @@ form.addEventListener("submit", async e => {
                 });
                 msg.appendChild(ul);
             } else {
-                msg.textContent = body.message || "An error occurred during login.";
+                msg.textContent = body.message || "An error occurred during signup.";
             }
             return;
         }
 
         //TODO: successful login, JWT and redirect to dashboard
-        msg.textContent = body.message || "Login successful.";
-
+        msg.textContent = body.message || "Signup successful.";
+        
     } catch (err) {
         msg.textContent = "Something went wrong. Please try again later.";
-        console.error("Login error:", err);
+        console.error("Signup error:", err);
     }
 });
