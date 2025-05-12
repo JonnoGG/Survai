@@ -1,11 +1,13 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
-const { isValidEmail, validatePassword } = require("../utils/validators");
+const { isValidEmail, validatePassword } = require("../utils/validation.utils");
+const { getTokenFromHeader, verifyToken } = require("../utils/auth.utils");
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
     const userModel = require("../models/user.model");
-    const { isValidEmail } = require("../utils/validators");
+    const { isValidEmail } = require("../utils/validation.utils");
 
     //error 400 checking - bad request
     const errors = [];
@@ -46,10 +48,13 @@ exports.login = async (req, res) => {
         }
 
         // successful login
-        //TODO: JWT storage?
+        //create JWT with 15 min expiry
+        //TODO add refresh token functionality
+        const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, { expiresIn: 60 * 15 });
         return res.status(200).json({
             status: "success",
             message: "Login successful.",
+            token
         });
     } catch (err) {
         console.error("Login error:", err);
@@ -71,8 +76,7 @@ exports.signup = async (req, res) => {
                 field: "user",
                 message: "An account with that email already exists. Please log in or reset your password.",
             });
-        }
-        else {
+        } else {
             if (!isValidEmail(email)) {
                 errors.push({
                     field: "email",
@@ -98,10 +102,17 @@ exports.signup = async (req, res) => {
 
         await userModel.createUser(email, passwordHash);
 
+        const user = await userModel.findByEmail(email);
+
+        //successful signup
+        //create JWT with 15 min expiry
+        //TODO add refresh token functionality
+
+        const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, { expiresIn: 60 * 15 });
         res.status(201).json({
             status: "success",
             message: "User created successfully.",
-            data: `Email: ${email}`,
+            token,
         });
     } catch (err) {
         console.error("Error creating user: " + err);
@@ -111,3 +122,20 @@ exports.signup = async (req, res) => {
         });
     }
 };
+
+exports.verify = (req, res) => {
+    const token = getTokenFromHeader(req);
+    console.log("token:" + token)
+    if (!token) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+        console.log("verifying token")
+        const user = verifyToken(token);
+        res.status(200).json({ user });
+    } catch (_err) {
+        console.log("bad token");
+        return res.status(401).json({ message: "Invalid or expired token" });
+    }
+}

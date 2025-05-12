@@ -614,6 +614,10 @@ video {
   display: none;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }

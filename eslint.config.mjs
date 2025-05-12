@@ -1,9 +1,34 @@
+// eslint.config.mjs
+import js from "@eslint/js";
 import globals from "globals";
-import pluginJs from "@eslint/js";
 
-/** @type {import('eslint').Linter.Config[]} */
+/** @type {import("eslint").Linter.Config[]} */
 export default [
-    { files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
-    { languageOptions: { globals: {...globals.node, ...globals.browser} } },
-    pluginJs.configs.recommended,
+    js.configs.recommended,
+
+    // node/backend files
+    {
+        files: ["**/*.js"],
+        languageOptions: {
+            sourceType: "commonjs",
+            globals: {
+                ...globals.node,
+                ...globals.browser,
+            },
+        },
+        rules: {
+            "no-unused-vars": ["error", { caughtErrorsIgnorePattern: "^_" }],
+        },
+    },
+
+    // browser/frontend files
+    {
+        files: ["public/js/**/*.js"],
+        languageOptions: {
+            sourceType: "module",
+            globals: {
+                ...globals.browser,
+            },
+        },
+    },
 ];

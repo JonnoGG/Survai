@@ -32,9 +32,12 @@ form.addEventListener("submit", async e => {
             return;
         }
 
-        //TODO: successful login, JWT and redirect to dashboard
+        //Successful login, store JWT and send to dashboard
+        //TODO: remove this once redirect is in
         msg.textContent = body.message || "Login successful.";
-
+        localStorage.setItem("token", body.token);
+        //TODO: redirect to dashboard
+        
     } catch (err) {
         msg.textContent = "Something went wrong. Please try again later.";
         console.error("Login error:", err);
