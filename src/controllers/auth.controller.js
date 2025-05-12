@@ -125,17 +125,14 @@ exports.signup = async (req, res) => {
 
 exports.verify = (req, res) => {
     const token = getTokenFromHeader(req);
-    console.log("token:" + token)
     if (!token) {
         return res.status(401).json({ message: "Unauthorized" });
     }
 
     try {
-        console.log("verifying token")
         const user = verifyToken(token);
         res.status(200).json({ user });
     } catch (_err) {
-        console.log("bad token");
         return res.status(401).json({ message: "Invalid or expired token" });
     }
 }
