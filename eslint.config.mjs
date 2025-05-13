@@ -23,7 +23,7 @@ export default [
 
     // browser/frontend files
     {
-        files: ["public/js/**/*.js"],
+        files: ["public/**/**/*.js"],
         languageOptions: {
             sourceType: "module",
             globals: {

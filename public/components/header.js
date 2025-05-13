@@ -1,15 +1,13 @@
+import "/components/logo.js";
+
 class SiteHeader extends HTMLElement {
     connectedCallback() {
         this.style.display = "block";
         this.style.width = "100%";
         this.innerHTML = `
-        <header class="w-full flex items-center justify-between border-b border-black-200 py-3 px-6 mb-3">
+        <header class="w-full flex items-center justify-between border-b bg-white border-black-200 py-3 px-6">
             <a href="/" class="text-4xl font-bold transition-all duration-500 hover:brightness-150 cursor-pointer">
-                <span class="text-black">Surv</span
-                ><span
-                    class="text-transparent bg-clip-text bg-gradient-to-tr from-violet-500 to-fuchsia-500 "
-                    >AI</span
-                >
+                <site-logo></site-logo>
             </a>
 
             <a
