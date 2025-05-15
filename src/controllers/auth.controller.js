@@ -50,7 +50,7 @@ exports.login = async (req, res) => {
         // successful login
         //create JWT with 15 min expiry
         //TODO add refresh token functionality
-        const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, { expiresIn: 60 * 15 });
+        const token = jwt.sign({ user: { id: user.id } }, process.env.JWT_KEY, { expiresIn: 60 * 15 });
         return res.status(200).json({
             status: "success",
             message: "Login successful.",

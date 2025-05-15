@@ -7,7 +7,9 @@ exports.requireAuth = (req, res, next) => {
     }
 
     try {
-        req.user = verifyToken(token);
+        
+        const { user } = verifyToken(token);
+        req.user = user;
         next();
     } catch (_) {
         return res.status(401).json({ message: "Invalid or expired token" });

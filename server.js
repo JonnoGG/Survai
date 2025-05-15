@@ -14,8 +14,8 @@ if (process.env.NODE_ENV !== "production") {
 //END DEV
 
 const authRoutes = require("./src/routes/auth.route");
-const userRoutes = require("./src/routes/user.route");
-const surveyRoutes = require("./src/routes/survey.route");
+const userRoutes = require("./src/routes/users.route");
+const surveyRoutes = require("./src/routes/surveys.route");
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/pages/home.html");
@@ -34,8 +34,8 @@ app.get("/dashboard", (req, res) => {
 });
 
 app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-app.use("/survey", surveyRoutes);
+app.use("/users", userRoutes);
+app.use("/surveys", surveyRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
