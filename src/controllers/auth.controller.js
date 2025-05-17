@@ -6,7 +6,6 @@ const { getTokenFromHeader, verifyToken } = require("../utils/auth.utils");
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
-    const userModel = require("../models/user.model");
     const { isValidEmail } = require("../utils/validation.utils");
 
     //error 400 checking - bad request
