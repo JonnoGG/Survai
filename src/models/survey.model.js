@@ -45,8 +45,6 @@ exports.getSurveyDetails = async (surveyId, userId) => {
 };
 
 exports.updateSurvey = async (surveyId, userId, { title, description}) => {
-    console.log(title);
-    console.log(description);
     const result = await db.query(
         `UPDATE surveys SET title = $1, description = $2
          WHERE id = $3 AND user_id = $4 RETURNING *`,

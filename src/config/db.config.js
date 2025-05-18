@@ -9,8 +9,9 @@ const pool = new Pool({
     database: process.env.DB_DATABASE,
 });
 
-module.exports = {
-    query: (text, params, callback) => {
+exports.pool = pool;
+
+exports.query = (text, params, callback) => {
         return pool.query(text, params, callback);
-    },
-};
+    };
+

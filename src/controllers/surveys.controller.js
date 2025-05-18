@@ -1,4 +1,6 @@
 const surveyModel = require("../models/survey.model");
+const questionModel = require("../models/question.model");
+const responseModel = require("../models/response.model");
 
 exports.createSurvey = async (req, res) => {
     const { title, description } = req.body;
@@ -104,3 +106,37 @@ exports.deleteSurvey = async (req, res) => {
         });
     }
 };
+
+exports.updateSurveyQuestions = async (req, res) => {
+    const userId = req.user.id;
+    const surveyId = req.params.id;
+    const questions = req.body.questions;
+
+    try {
+
+        const hasResponses = await responseModel.hasResponses(surveyId);
+        if (hasResponses) {
+            return res.status(403).json({
+                status: "fail",
+                message: "Cannot edit questions after responses have been submitted."
+            })
+        }
+        const updated = await questionModel.replaceQuestions(surveyId, userId, questions);
+        if (!updated) {
+            return res.status(404).json({
+                status: "fail",
+                message: "Survey not found",
+            });
+        }
+        res.status(200).json({
+            status: "success",
+            data: { updated },
+        }); 
+    } catch (err) {
+        console.error("Error updating survey questions: ", err);
+        res.status(500).json({
+            status: "error",
+            message: "Internal server error.",
+        });
+    }
+}
