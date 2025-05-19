@@ -3,12 +3,17 @@ const router = express.Router();
 const { requireAuth } = require("../middleware/auth.middleware");
 const { verifySurveyOwner } = require("../middleware/verifySurveyOwner.middleware");
 const surveyController = require("../controllers/surveys.controller");
+const path = require("path");
 
-// All endpoints require auth
+router.get("/", (req, res) => {
+    res.sendFile(path.join(__basedir, "/public/pages/surveys.html"));
+});
+
+// All api endpoints require auth
 router.use(requireAuth);
 
 router.post("/", surveyController.createSurvey);
-router.get("/", surveyController.getAllSurveys);
+router.get("/all", surveyController.getAllSurveys);
 router.get("/:id", verifySurveyOwner, surveyController.getSurveyById);
 router.put("/:id", verifySurveyOwner, surveyController.updateSurvey);
 router.delete("/:id", verifySurveyOwner, surveyController.deleteSurvey);

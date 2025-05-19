@@ -1,7 +1,7 @@
 class Sidebar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <aside class="w-64 bg-gray-50 p-6 pt-4 flex flex-col justify-start">
+            <aside class="w-64 bg-gray-50 p-6 flex flex-col justify-start">
                 <site-logo class="text-3xl"></site-logo>
                 <nav id= "sidebarNav" class="space-y-2 flex flex-col my-4">
                     <a href="/dashboard">Dashboard</a>

@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
+const path = require("path");
+global.__basedir = __dirname;
 
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
@@ -18,19 +20,19 @@ const userRoutes = require("./src/routes/users.route");
 const surveyRoutes = require("./src/routes/surveys.route");
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/pages/home.html");
+    res.sendFile(path.join(__dirname, "/public/pages/home.html"));
 });
 
 app.get("/login", (req, res) => {
-    res.sendFile(__dirname + "/public/pages/login.html");
+    res.sendFile(path.join(__dirname, "/public/pages/login.html"));
 });
 
 app.get("/signup", (req, res) => {
-    res.sendFile(__dirname + "/public/pages/signup.html");
+    res.sendFile(path.join(__dirname, "/public/pages/signup.html"));
 });
 
 app.get("/dashboard", (req, res) => {
-    res.sendFile(__dirname + "/public/pages/dashboard.html");
+    res.sendFile(path.join(__dirname, "/public/pages/dashboard.html"));
 });
 
 app.use("/auth", authRoutes);
