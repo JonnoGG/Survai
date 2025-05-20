@@ -9,6 +9,10 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__basedir, "/public/pages/surveys.html"));
 });
 
+router.get("/builder", (req, res) => {
+    res.sendFile(path.join(__basedir, "/public/pages/builder.html"));
+});
+
 // All api endpoints require auth
 router.use(requireAuth);
 

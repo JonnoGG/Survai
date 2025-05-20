@@ -1,14 +1,14 @@
 class Sidebar extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-            <aside class="w-64 bg-gray-50 p-6 flex flex-col justify-start">
+            <aside class="w-56 h-full bg-gray-50 px-6 pt-6 flex flex-col">
                 <site-logo class="text-3xl"></site-logo>
-                <nav id= "sidebarNav" class="space-y-2 flex flex-col my-4">
+                <nav id= "sidebarNav" class="space-y-2 flex-1 flex flex-col my-4">
                     <a href="/dashboard">Dashboard</a>
                     <a href="/surveys">Surveys</a>
                     <a href="/responses">Responses</a>
-                    <a href="settings">Settings</a>
-                    <a href="#">Log out</a>
+                    <div class="flex-1 border-b-2"></div>
+                    <a href="#" class="text-red-700">Log out</a>
                 </nav>
             </aside>
         `;

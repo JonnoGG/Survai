@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Survey Builder</title>
+        <link href="/css/output.css" rel="stylesheet" />
+    </head>
+    <body class="bg-gray-50">
+        <div class="flex h-screen">
+            <!-- Sidebar -->
+            <site-sidebar></site-sidebar>
+
+            <!-- Main content -->
+            <main id="mainContent" class="flex-1 p-5 bg-white shadow-xl rounded-l-xl">
+                <!-- Header -->
+                <div class="flex justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-black">Survey Builder</h2>
+                    <button id="publishBtn" class="bg-violet-600 text-white px-4 py-2 rounded-xl hover:bg-violet-700">
+                        Publish
+                    </button>
+                </div>
+
+                <div class="max-w-xl m-auto space-y-4">
+                    <!-- Survey Metadata -->
+                    <div class="p-8 border border-gray-200 rounded-xl shadow-md space-y-4">
+                        <div>
+                            <label for="surveyTitle" class="block mb-1 font-medium">Title:</label>
+                            <input id="surveyTitle" type="text" placeholder="Survey Title" class="input-base" />
+                        </div>
+                        <div>
+                            <label for="surveyDescription" class="block mb-1 font-medium">Description (Optional):</label>
+                            <textarea
+                                id="surveyDescription"
+                                placeholder="Survey Description (Optional)"
+                                class="input-base"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Questions Container -->
+                    <div
+                        id="surveyContainer"
+                        class="bg-white px-8 py-4 border border-gray-200 rounded-xl shadow-md divide-y divide-gray-200 overflow-hidden"
+                    >
+                        <!-- Survey Items -->
+                    </div>
+
+                    <!-- Add Question -->
+                    <button
+                        id="addBtn"
+                        class="px-4 py-2 bg-violet-600 text-white rounded-xl hover:bg-violet-700 block m-auto"
+                    >
+                        + Add Question
+                    </button>
+                </div>
+            </main>
+        </div>
+        <script type="module" src="/js/builder.js"></script>
+        <script type="module" src="/components/logo.js"></script>
+        <script type="module" src="/components/sidebar.js"></script>
+    </body>
+</html>
