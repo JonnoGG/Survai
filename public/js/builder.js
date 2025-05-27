@@ -59,7 +59,7 @@ publishBtn.addEventListener("click", async () => {
   console.log(title, description);
   try {
     if (!surveyId) {
-      const res = await apiFetch("/surveys", {
+      const res = await apiFetch("/api/surveys", {
         method: "POST",
         body: JSON.stringify({ title, description }),
       });
@@ -83,7 +83,7 @@ publishBtn.addEventListener("click", async () => {
       return { text, question_type: type, required, options };
     });
 
-    const qRes = await apiFetch(`/surveys/${surveyId}/questions`, {
+    const qRes = await apiFetch(`/api/surveys/${surveyId}/questions`, {
         method: "PUT",
         body: JSON.stringify({ questions: allQuestions }),
     });

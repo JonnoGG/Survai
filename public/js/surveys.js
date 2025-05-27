@@ -55,7 +55,7 @@ const renderEmpty = () => {
 }
 
 try {
-    const res = await apiFetch("/surveys/all", {
+    const res = await apiFetch("/api/surveys/all", {
         method: "GET",
     });
 

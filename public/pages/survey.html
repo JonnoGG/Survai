@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey Details</title>
+    <link href="/css/output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-50">
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <site-sidebar></site-sidebar>
+
+      <!-- Main content -->
+      <main id="mainContent" class="flex-1 p-5 bg-white shadow-xl rounded-l-xl">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-black">Survey Details</h2>
+          <div class="flex gap-2">
+            <button
+              id="viewResponsesBtn"
+              class="bg-gray-200 text-black px-4 py-2 rounded-xl hover:bg-gray-300 hidden"
+            >
+              View Responses
+            </button>
+            <button
+              id="saveBtn"
+              class="bg-violet-600 text-white px-4 py-2 rounded-xl hover:bg-violet-700 hidden"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+
+        <div class="max-w-xl m-auto space-y-4">
+          <!-- Survey Metadata -->
+          <div class="p-8 border border-gray-200 rounded-xl shadow-md space-y-4">
+            <div>
+              <label for="surveyTitle" class="block mb-1 font-medium">Title:</label>
+              <input id="surveyTitle" type="text" class="input-base" disabled />
+            </div>
+            <div>
+              <label for="surveyDescription" class="block mb-1 font-medium">Description:</label>
+              <textarea id="surveyDescription" class="input-base" disabled></textarea>
+            </div>
+          </div>
+
+          <!-- Questions Container -->
+          <div
+            id="surveyContainer"
+            class="bg-white px-8 py-4 border border-gray-200 rounded-xl shadow-md divide-y divide-gray-200"
+          >
+            <!-- Questions will be inserted here -->
+          </div>
+
+          <!-- Add Question -->
+          <button
+            id="addQuestionBtn"
+            class="px-4 py-2 bg-violet-600 text-white rounded-xl hover:bg-violet-700 block m-auto hidden"
+          >
+            + Add Question
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="/js/survey.js"></script>
+    <script type="module" src="/components/logo.js"></script>
+    <script type="module" src="/components/sidebar.js"></script>
+  </body>
+</html>

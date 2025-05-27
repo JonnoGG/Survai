@@ -17,7 +17,8 @@ if (process.env.NODE_ENV !== "production") {
 
 const authRoutes = require("./src/routes/auth.route");
 const userRoutes = require("./src/routes/users.route");
-const surveyRoutes = require("./src/routes/surveys.route");
+const surveyAPIRoutes = require("./src/routes/surveys.api.route");
+const surveyPagesRoutes = require("./src/routes/surveys.pages.route");
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/pages/home.html"));
@@ -37,7 +38,8 @@ app.get("/dashboard", (req, res) => {
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-app.use("/surveys", surveyRoutes);
+app.use("/surveys", surveyPagesRoutes);
+app.use("/api/surveys", surveyAPIRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
