@@ -10,8 +10,8 @@ router.get("/builder", (req, res) => {
     res.sendFile(path.join(__basedir, "/public/pages/builder.html"));
 });
 
-// router.get("/builder", (req, res) => {
-//     res.sendFile(path.join(__basedir, "/public/pages/builder.html"));
-// });
+router.get("/:id", (req, res) => {
+    res.sendFile(path.join(__basedir, "/public/pages/survey.html"));
+});
 
 module.exports = router;
